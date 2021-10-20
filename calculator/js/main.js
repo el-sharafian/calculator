@@ -1,17 +1,27 @@
 var inputString = ["", "", "", "", "", "", "", ""];
-// input.length = 8;
 var input = "";
-// input.fill("");
 var inputCounter = 0;
 var operandCounter = 0;
 var operand = [""];
 var numberCounter = 0;
 var number = [0, 0, 0, 0, 0];
+var isDecimalized = 0;
 
 function appendNumber(num) {
+  if(isDecimalized == 1)
+  {
+    num = num * 0.1;
+    number[numberCounter] = number[numberCounter] + num;
+    isDecimalized = 0;
+  }
+  else{
   number[numberCounter] = number[numberCounter] * 10 + num;
   inputString[inputCounter] = number[numberCounter];
   display();
+  }
+}
+function decimalize() {
+  isDecimalized = 1;
 }
 function clearInput() {
   operand = [""];
@@ -20,7 +30,6 @@ function clearInput() {
   inputCounter = 0;
   numberCounter = 0;
   operandCounter = 0;
-  // document.getElementById("calculator-input").innerHTML = "oo";
   display();
 }
 function compute() {
@@ -35,7 +44,7 @@ function compute() {
   number[0] = clc;
   inputString = ["", "", "", "", "", "", "", ""];
   inputString[0] = clc.toString();
-  inputCounter = 1;
+  inputCounter = 0;
   numberCounter = 0;
   operandCounter = 0;
 }
@@ -71,3 +80,5 @@ function display() {
   }
   document.getElementById("calculator-input").innerHTML = input;
 }
+
+
